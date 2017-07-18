@@ -1,0 +1,150 @@
+# VARIABLES
+set $font IosevkaTerm Medium
+set $active #222222
+set $inactive #222222
+set $focused #3f826d
+set $unfocused #222222
+set $urgent #fa555a
+
+# STARTUP
+exec nitrogen --restore
+exec xset r rate 180 45
+exec setxkbmap -layout es -option caps:escape
+exec unclutter --timeout 1 --fork
+exec --no-startup-id redshift-gtk
+exec --no-startup-id compton -o 0
+exec --no-startup-id xfce4-panel --disable-wm-check
+exec --no-startup-id dbus-launch nm-applet
+exec --no-startup-id dbus-launch pasystray
+
+# CONFIG
+floating_modifier $mod
+font pango:$font 14
+gaps inner 12
+hide_edge_borders both
+new_window normal 0px
+popup_during_fullscreen smart
+
+# KEYBINDINGS
+set $mod Mod4
+
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -fn '$font:pixelsize=18' -nb '"$inactive"' -nf '#888888' -sb '"$focused"' -sf '#dedede' -l 10 -i"
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+a split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+space focus mode_toggle
+
+# bindsym $mod+a focus parent
+# bindsym $mod+d focus child
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -f pango:$font -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# STATUS BAR
+bar {
+	position top
+	font pango: $font 14
+	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	
+	colors {
+		background $inactive
+		statusline #ffffff
+		separator $inactive
+		focused_workspace $focused $focused #ffffff
+		active_workspace $active $active #ffffff
+		inactive_workspace $inactive $inactive #ffffff
+		urgent_workspace $urgent $urgent #ffffff
+	}
+}
+
+# COLORS
+client.focused $focused $focused #ffffff $focused
+client.focused_inactive $inactive $inactive #ffffff $inactive
+client.unfocused $inactive $inactive #888888 $inactive
+client.urgent $urgent $urgent #ffffff $urgent
+
+# SCRIPTS
+bindsym $mod+p exec passmenu # Open password store with dmenu
+
+bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # All screens
+bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
+
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # Increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # Decrease screen brightness
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% # Increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% # Decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # Mute sound
+
+bindsym XF86PowerOff exec "i3-nagbar -f pango:$font -t warning -m 'You pressed the power button. Do you really want to shut down?' -b 'Yes, shut down' 'systemctl poweroff'"
