@@ -65,9 +65,6 @@ bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+space focus mode_toggle
 
-# bindsym $mod+a focus parent
-# bindsym $mod+d focus child
-
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -92,40 +89,39 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -f pango:$font -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
 
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 # STATUS BAR
 bar {
-	position top
-	font pango: $font 14
-	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	
-	colors {
-		background $inactive
-		statusline #ffffff
-		separator $inactive
-		focused_workspace $focused $focused #ffffff
-		active_workspace $active $active #ffffff
-		inactive_workspace $inactive $inactive #ffffff
-		urgent_workspace $urgent $urgent #ffffff
-	}
+  position top
+  font pango: $font 14
+  status_command i3blocks -c ~/.config/i3/i3blocks.conf
+
+  colors {
+    background $inactive
+    statusline #ffffff
+    separator $inactive
+    focused_workspace $focused $focused #ffffff
+    active_workspace $active $active #ffffff
+    inactive_workspace $inactive $inactive #ffffff
+    urgent_workspace $urgent $urgent #ffffff
+  }
 }
 
 # COLORS
@@ -148,3 +144,5 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% # 
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # Mute sound
 
 bindsym XF86PowerOff exec "i3-nagbar -f pango:$font -t warning -m 'You pressed the power button. Do you really want to shut down?' -b 'Yes, shut down' 'systemctl poweroff'"
+
+bindsym $mod+Shift+e exec "i3-nagbar -f pango:$font -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
