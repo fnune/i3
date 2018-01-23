@@ -28,6 +28,8 @@ popup_during_fullscreen smart
 # KEYBINDINGS
 set $mod Mod4
 
+bindsym $mod+x move workspace to output up
+
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -fn '$font:pixelsize=18' -nb '"$inactive"' -nf '#888888' -sb '"$focused"' -sf '#dedede' -l 10 -i"
