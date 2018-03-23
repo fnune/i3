@@ -25,6 +25,9 @@ hide_edge_borders both
 new_window none
 popup_during_fullscreen smart
 
+# CONSTRAIN FLOATING WINDOW SIZE
+floating_maximum_size 1200 x 800
+
 # KEYBINDINGS
 set $mod Mod4
 
