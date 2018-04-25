@@ -1,10 +1,11 @@
 # VARIABLES
-set $font IosevkaTerm Medium
+set $font RobotoCondensed
 set $active #222222
 set $inactive #222222
 set $focused #3f826d
 set $unfocused #222222
 set $urgent #fa555a
+set $transparent #00000000
 
 # STARTUP
 exec nitrogen --restore
@@ -20,7 +21,7 @@ exec --no-startup-id dbus-launch pasystray
 # CONFIG
 floating_modifier $mod
 font pango:$font 14
-gaps inner 12
+gaps inner 8
 hide_edge_borders both
 new_window none
 popup_during_fullscreen smart
@@ -114,17 +115,18 @@ bindsym $mod+r mode "resize"
 
 # STATUS BAR
 bar {
+  i3bar_command i3bar -t
   position top
   font pango: $font 14
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
   colors {
-    background $inactive
+    background $transparent
     statusline #ffffff
-    separator $inactive
+    separator $transparent
     focused_workspace $focused $focused #ffffff
     active_workspace $active $active #ffffff
-    inactive_workspace $inactive $inactive #ffffff
+    inactive_workspace $transparent $transparent #ffffff
     urgent_workspace $urgent $urgent #ffffff
   }
 }
