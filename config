@@ -6,6 +6,7 @@ set $focused #3f826d
 set $unfocused #222222
 set $urgent #fa555a
 set $transparent #00000000
+set $blue #6cd6fc
 
 # STARTUP
 exec nitrogen --restore
@@ -124,8 +125,8 @@ bar {
     background $transparent
     statusline #ffffff
     separator $transparent
-    focused_workspace $focused $focused #ffffff
-    active_workspace $active $active #ffffff
+    focused_workspace $transparent $transparent $blue
+    active_workspace $transparent $transparent #ffffff
     inactive_workspace $transparent $transparent #ffffff
     urgent_workspace $urgent $urgent #ffffff
   }
