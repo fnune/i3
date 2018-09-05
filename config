@@ -141,8 +141,11 @@ client.urgent $urgent $urgent #ffffff $urgent
 # SCRIPTS
 bindsym $mod+p exec passmenu # Open password store with dmenu
 
-bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # All screens
-bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
+# Screenshots
+set $SS_DIR ~/Pictures/screenshots
+# Screenshot commands
+bindsym --release Print exec mkdir -p $SS_DIR && maim | tee $SS_DIR/screenshot_$(date +%Y%m%d_%H%M%S).png | xclip -selection clipboard -t image/png # All screens
+bindsym --release Shift+Print exec mkdir -p $SS_DIR && maim -s | tee $SS_DIR/screenshot_$(date +%Y%m%d_%H%M%S).png | xclip -selection clipboard -t image/png # Area selection
 
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # Increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # Decrease screen brightness
