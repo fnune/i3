@@ -37,7 +37,8 @@ bindsym $mod+x move workspace to output up
 
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -fn '$font:pixelsize=18' -nb '"$inactive"' -nf '#888888' -sb '"$focused"' -sf '#dedede' -l 10 -i"
+bindsym $mod+d exec rofi -show-icons -modi drun -show drun
+bindsym $mod+p exec bwmenu
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -137,9 +138,6 @@ client.focused $focused $focused #ffffff $focused
 client.focused_inactive $inactive $inactive #ffffff $inactive
 client.unfocused $inactive $inactive #888888 $inactive
 client.urgent $urgent $urgent #ffffff $urgent
-
-# SCRIPTS
-bindsym $mod+p exec passmenu # Open password store with dmenu
 
 # Screenshots
 set $SS_DIR ~/Pictures/screenshots
