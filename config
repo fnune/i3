@@ -35,7 +35,7 @@ set $mod Mod4
 
 bindsym $mod+x move workspace to output up
 
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show-icons -modi drun -show drun
 bindsym $mod+p exec bwmenu
