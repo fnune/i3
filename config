@@ -9,11 +9,11 @@ set $transparent #00000000
 set $blue #6cd6fc
 
 # STARTUP
-exec nitrogen --restore
-exec xset r rate 180 45
-exec setxkbmap -layout es -option caps:escape
-exec unclutter --timeout 1 --fork
-exec --no-startup-id redshift-gtk
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id xset r rate 180 45
+exec --no-startup-id setxkbmap -layout es -option caps:escape
+exec --no-startup-id unclutter --timeout 1 --fork
+exec --no-startup-id redshift-gtk -l 52.5166667:13.4
 exec --no-startup-id compton -o 0
 exec --no-startup-id xfce4-panel --disable-wm-check
 exec --no-startup-id dbus-launch nm-applet
@@ -22,7 +22,7 @@ exec --no-startup-id dbus-launch pasystray
 # CONFIG
 floating_modifier $mod
 font pango:$font 14
-gaps inner 8
+gaps inner 25
 hide_edge_borders both
 new_window none
 popup_during_fullscreen smart
