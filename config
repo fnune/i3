@@ -1,5 +1,5 @@
 # VARIABLES
-set $font RobotoCondensed
+set $font Cascadia Code SemiLight
 set $active #222222
 set $inactive #222222
 set $focused #3f826d
@@ -14,15 +14,15 @@ exec --no-startup-id xset r rate 180 45
 exec --no-startup-id setxkbmap -layout es -option caps:escape
 exec --no-startup-id unclutter --timeout 1 --fork
 exec --no-startup-id redshift-gtk -l 52.5166667:13.4
-exec --no-startup-id compton -o 0
 exec --no-startup-id xfce4-panel --disable-wm-check
 exec --no-startup-id dbus-launch nm-applet
 exec --no-startup-id dbus-launch pasystray
+exec --no-startup-id gnome-screensaver
 
 # CONFIG
 floating_modifier $mod
 font pango:$font 14
-gaps inner 25
+gaps inner 0
 hide_edge_borders both
 new_window none
 popup_during_fullscreen smart
@@ -35,10 +35,10 @@ set $mod Mod4
 
 bindsym $mod+x move workspace to output up
 
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec rofi -show-icons -modi drun -show drun
-bindsym $mod+p exec bwmenu
+bindsym $mod+d exec rofi -show-icons -modi drun -show drun -theme arc
+bindsym $mod+p exec bwmenu --auto-lock=-1 --no-clear -- -lines 3 -theme arc
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -97,6 +97,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
+bindsym $mod+Shift+p exec gnome-screensaver-command -l
 
 mode "resize" {
   bindsym h resize shrink width 10 px or 10 ppt
@@ -119,16 +120,16 @@ bindsym $mod+r mode "resize"
 bar {
   i3bar_command i3bar -t
   position top
-  font pango: $font 14
+  font pango: $font 12
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
   colors {
-    background $transparent
+    background #00000095
     statusline #ffffff
-    separator $transparent
-    focused_workspace $transparent $transparent $blue
-    active_workspace $transparent $transparent #ffffff
-    inactive_workspace $transparent $transparent #ffffff
+    separator #00000095
+    focused_workspace #00000095 #00000095 $blue
+    active_workspace #00000095 #00000095 #ffffff
+    inactive_workspace #00000095 #00000095 #ffffff
     urgent_workspace $urgent $urgent #ffffff
   }
 }
@@ -151,6 +152,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # Decrease screen brightne
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% # Increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% # Decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # Mute sound
+bindsym Pause exec spotifycli --playpause
 
 bindsym XF86PowerOff exec "i3-nagbar -f pango:$font -t warning -m 'You pressed the power button. Do you really want to shut down?' -b 'Yes, shut down' 'systemctl poweroff'"
 
